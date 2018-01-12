@@ -1,33 +1,52 @@
+import { OneMoreActions } from "./onemore.actions";
 
 export type IGender = "Male" | "Female";
 
+export interface ILoggedInInfo {
+	isLoggedIn: Boolean;
+	accessTokenId: String;
+}
+
 export interface IUserInfo{
-    name: String;
-    dob: String;
-    contactNumber: number;
-    gender: IGender;
+	name: String;
+	// dob: String;
+	email: String
+	gender: IGender;
 }
 
 export interface IOneMoreState {
-    tokenId: String;
-    userInfo: IUserInfo;
+	loggedInInfo: ILoggedInInfo
+	userInfo: IUserInfo;
 }
 
 export const INITIAL_STATE: IOneMoreState = {
-    tokenId: "",
-    userInfo: {
-        name: '',
-        dob: '',
-        contactNumber: 0,
-        gender: null,
-    }
+	loggedInInfo: {
+		isLoggedIn: null,
+		accessTokenId: null
+	},
+	userInfo: {
+			name: '',
+			email: '',
+			gender: null,
+	}
 };
 
 export function rootReducer(lastState: IOneMoreState = INITIAL_STATE, action ) {
-    switch(action.type) {
-        case 'First':
-
-        default:
-           return lastState;
-    }
+	switch(action.type) {
+		case OneMoreActions.UPDATE_USER_INFO:
+			return {
+				...lastState,
+				userInfo: action.payload.userInfo
+			};
+		case OneMoreActions.UPDATE_LOGGEDIN_STATUS:
+			return {				
+				...lastState,
+				loggedInInfo: {
+					isLoggedIn: action.payload.isLoggedIn,
+					accessTokenId: action.payload.accessTokenId
+				},
+			};
+		default:
+			return lastState;
+	}
 }

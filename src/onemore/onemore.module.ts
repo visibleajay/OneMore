@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { FormComponent } from './form/form.component';
 
 import { AuthService } from './service/auth.service';
+import { OneMoreActions } from './core/onemore.actions';
 
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { INITIAL_STATE, IOneMoreState, rootReducer } from './core/onemore.state';
@@ -26,10 +27,10 @@ import { ROUTES } from './onemore.constant';
     FormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [AuthService],
+  providers: [AuthService, OneMoreActions],
   bootstrap: [OneMoreComponent]
 })
-export class OneMoreModule { 
+export class OneMoreModule {
   constructor(ngRedux: NgRedux<IOneMoreState>,
               devTools: DevToolsExtension) {
     const storeEnhancers = devTools.isEnabled() ? [devTools.enhancer()] : [];
