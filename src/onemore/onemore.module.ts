@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { OneMoreComponent } from './onemore.component';
 import { LoginComponent } from './login/login.component';
 import { FormComponent } from './form/form.component';
 
@@ -15,7 +15,7 @@ import { ROUTES } from './onemore.constant';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    OneMoreComponent,
     LoginComponent,
     FormComponent
   ],
@@ -25,9 +25,9 @@ import { ROUTES } from './onemore.constant';
     RouterModule.forRoot(ROUTES)
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [OneMoreComponent]
 })
-export class AppModule { 
+export class OneMoreModule { 
   constructor(ngRedux: NgRedux<IOneMoreState>,
               devTools: DevToolsExtension) {
       const storeEnhancers = devTools.isEnabled() ? [devTools.enhancer()] : [];
