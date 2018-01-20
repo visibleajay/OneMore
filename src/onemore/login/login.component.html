@@ -1,8 +1,7 @@
-
 <div style="text-align: center; width: 500px; height: 500px; background-color: #34e; margin: auto">
-    <input [(ngModel)]="user.name" placeholder="UserName" type="text" /><br>
-    <input [(ngModel)]="user.password" placeholder="Password" type="password" /><br>
-    <div style="display: flex">
+    <input style="margin: 5px auto;" [(ngModel)]="user.name" placeholder="UserName" type="text" /><br>
+    <input style="margin: 5px auto;" [(ngModel)]="user.password" placeholder="Password" type="password" /><br>
+    <div>
         <button>Register</button>
         <button (click)="this.authService.signIn(user)">Submit</button>
     </div><br>
@@ -12,7 +11,7 @@
         <hr style="width: 40%">
     </div><br>
     <div>Sign In With</div><br>
-    <div style="display: flex">
+    <div style="flex-direction: row;box-sizing: border-box;display: flex;max-height: 100%;place-content: center;align-items: center;">
         <span (click)="this.authService.facebookSignIn()" style="display: block; width: 75px; height: 100px; background: no-repeat center/80% url('../../assets/facebook-logo.svg'); cursor: pointer;"></span>
         <span (click)="this.authService.googleSignIn()" style="display: block; width: 75px; height: 100px; background: no-repeat center/80% url('../../assets/google-logo.svg'); cursor: pointer;"></span>
     </div>
