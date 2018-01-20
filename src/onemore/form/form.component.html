@@ -1,12 +1,12 @@
 <div style="width: 500px; height: 500px; background-color: #e3e; margin: auto">
-	<input type="text" placeholder="Name" /><br>
-	<input type="text" placeholder="Email" /><br>
+	<input type="text" placeholder="Name" [value]="(user$ | async)?.name" /><br>
+	<input type="text" placeholder="Email" [value]="(user$ | async)?.email" /><br>
 	<input type="date" placeholder="Date Of Birth" /><br>
 	<input type="text" placeholder="Description" /><br>
-	<select>
+	<select [value]="(user$ | async)?.gender">
 		<option disabled>Gender</option>
-		<option value="Male">Male</option>
-		<option value="Female">Female</option>
+		<option value="male">Male</option>
+		<option value="female">Female</option>
 	</select><br>
 	<div style="display: flex;">
 		<button>Cancel</button>

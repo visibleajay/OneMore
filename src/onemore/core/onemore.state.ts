@@ -21,7 +21,7 @@ export interface IOneMoreState {
 
 export const INITIAL_STATE: IOneMoreState = {
 	loggedInInfo: {
-		isLoggedIn: null,
+		isLoggedIn: false,
 		accessTokenId: null
 	},
 	userInfo: {

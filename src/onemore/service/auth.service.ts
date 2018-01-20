@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import { IOneMoreState, IUserInfo, ILoggedInInfo } from '../core/onemore.state';
 import { OneMoreActions } from '../core/onemore.actions';
+import { Router } from '@angular/router';
 
 declare var firebase: any;
 
@@ -14,7 +15,9 @@ export class AuthService {
 	private FACEBOOK_PROVIDER;
 
 	constructor(public ngRedux: NgRedux<IOneMoreState>,
-							public oneMoreActions: OneMoreActions) {
+							public oneMoreActions: OneMoreActions,
+							private router: Router
+						) {
 		this.CONFIG = {
 				apiKey: "AIzaSyCOpyDNYSvg7ugzj0KNpxHylfmUoV8vHNw",
 				authDomain: "onemore-b49c1.firebaseapp.com",
@@ -50,31 +53,28 @@ export class AuthService {
 
 	facebookSignIn() {
 		firebase.auth().signInWithPopup(this.FACEBOOK_PROVIDER).then(this.APISuccess).catch((error) => {
-			this.checkAlreadyExists(error);
-			console.error({error: error})
+	
 		});
 	}
 
 	APISuccess = (result) => {
-		console.log(JSON.stringify(result));
-			const USER: IUserInfo = {
-				'name': result.additionalUserInfo.profile.name,
-				'email': result.additionalUserInfo.profile.email,
-				'gender': result.additionalUserInfo.profile.gender
-			};
-			const LOGGEDININFO: ILoggedInInfo = {
-				'isLoggedIn': true,
-				'accessTokenId': result.credential.accessToken
-			}
-			this.ngRedux.dispatch(this.oneMoreActions.updateLoggedInStatus(LOGGEDININFO));
-			this.ngRedux.dispatch(this.oneMoreActions.updateUserInfo(USER));
+		const USER: IUserInfo = {
+			'name': result.additionalUserInfo.profile.name,
+			'email': result.additionalUserInfo.profile.email,
+			'gender': result.additionalUserInfo.profile.gender
+		};
+		const LOGGEDININFO: ILoggedInInfo = {
+			'isLoggedIn': true,
+			'accessTokenId': result.credential.accessToken
+		};
+		this.router.navigate(['/form']);
+		this.ngRedux.dispatch(this.oneMoreActions.updateLoggedInStatus(LOGGEDININFO));
+		this.ngRedux.dispatch(this.oneMoreActions.updateUserInfo(USER));
 	}
 	
 	private checkAlreadyExists(error) {
 		if ( error.code === "auth/account-exists-with-different-credential" ) {
-			firebase.auth().fetchProvidersForEmail(error.email).then( (providers) => {
-					
-			});
+			
 		}
 	}
 
