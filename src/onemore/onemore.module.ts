@@ -8,7 +8,10 @@ import { OneMoreComponent } from './onemore.component';
 import { LoginComponent } from './login/login.component';
 import { FormComponent } from './form/form.component';
 
-import { MatInputModule, MatFormFieldModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, 
+         MatFormFieldModule, 
+         MatButtonModule, 
+         MatSelectModule } from '@angular/material';
 
 import { AuthService } from './service/auth.service';
 import { OneMoreActions } from './core/onemore.actions';
@@ -32,7 +35,8 @@ import { ROUTES } from './onemore.constant';
     RouterModule.forRoot(ROUTES),
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [AuthService, OneMoreActions],
   bootstrap: [OneMoreComponent]
