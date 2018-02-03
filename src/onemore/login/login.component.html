@@ -1,17 +1,30 @@
-<div style="text-align: center; width: 500px; height: 500px; background-color: #34e; margin: auto">
-    <input style="margin: 5px auto;" [(ngModel)]="user.name" placeholder="UserName" type="text" /><br>
-    <input style="margin: 5px auto;" [(ngModel)]="user.password" placeholder="Password" type="password" /><br>
-    <div>
-        <button>Register</button>
-        <button (click)="this.authService.signIn(user)">Submit</button>
-    </div><br>
-    <div style="display: flex; text-align: center">
-        <hr style="width: 40%">
+<div style="width: 500px; height: 500px; text-align: center; margin: auto;">
+    <h4>SIGN IN</h4>
+    <form style="display: flex; flex-direction: column;" [formGroup]="loginForm" 
+            (ngSubmit)="this.authService.signIn(loginForm.value)">
+        <mat-form-field style="flex: 1;">
+            <input matInput placeholder="Name" formControlName="name" type="text">
+            <mat-error>
+                Name is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field style="flex: 1;">
+            <input matInput placeholder="Password" formControlName="password" type="password">
+            <mat-error>
+                Password is required.
+            </mat-error>
+        </mat-form-field>
+        <div style="flex: 1; text-align: end;">
+            <button mat-button type="button">Register</button>
+            <button mat-button type="submit">Submit</button>
+        </div>
+    </form>
+    <div style="flex: 1; flex-direction: row; display: flex;">
+        <hr style="flex: 0.4; color: beige">
         <div>or</div>
-        <hr style="width: 40%">
-    </div><br>
-    <div>Sign In With</div><br>
-    <div style="flex-direction: row;box-sizing: border-box;display: flex;max-height: 100%;place-content: center;align-items: center;">
+        <hr style="flex: 0.4; color: beige">
+    </div>
+    <div style="flex:1; flex-direction: row; display: flex; justify-content: center;">
         <span (click)="this.authService.facebookSignIn()" style="display: block; width: 75px; height: 100px; background: no-repeat center/80% url('../../assets/facebook-logo.svg'); cursor: pointer;"></span>
         <span (click)="this.authService.googleSignIn()" style="display: block; width: 75px; height: 100px; background: no-repeat center/80% url('../../assets/google-logo.svg'); cursor: pointer;"></span>
     </div>

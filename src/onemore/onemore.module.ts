@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { OneMoreComponent } from './onemore.component';
 import { LoginComponent } from './login/login.component';
 import { FormComponent } from './form/form.component';
+
+import { MatInputModule, MatFormFieldModule, MatButtonModule } from '@angular/material';
 
 import { AuthService } from './service/auth.service';
 import { OneMoreActions } from './core/onemore.actions';
@@ -23,9 +26,13 @@ import { ROUTES } from './onemore.constant';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     NgReduxModule,
-    FormsModule,
-    RouterModule.forRoot(ROUTES)
+    ReactiveFormsModule,
+    RouterModule.forRoot(ROUTES),
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule
   ],
   providers: [AuthService, OneMoreActions],
   bootstrap: [OneMoreComponent]
